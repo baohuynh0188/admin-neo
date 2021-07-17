@@ -79,7 +79,7 @@ const User = () => {
                                     <td>{item.admin}</td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
-                                            <button type="button" className="btn btn-danger" onClick={() => deleteUser(item.username)}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteUser(item.username) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                             <button type="button" className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                         </div>
                                     </td>

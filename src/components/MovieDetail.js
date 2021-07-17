@@ -99,9 +99,9 @@ const MovieDetail = () => {
                     </div>
                 </div>
                 <div className="col-6 mb-3">
-                    <figure class="figure">
-                        <img src={`http://127.0.0.1:9000/${movies.poster}`} class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure." />
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                    <figure className="figure">
+                        <img src={`http://127.0.0.1:9000/${movies.poster}`} className="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure." />
+                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
                     </figure>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Bar } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 
-const LineChart = (props) => {
+const DoughnutChart = (props) => {
+
     const data = {
         labels: props.username,
         datasets: [
@@ -29,29 +30,11 @@ const LineChart = (props) => {
         ]
     }
 
-    const options = {
-        indexAxis: 'y',
-        // Elements options apply to all of the options unless overridden in a dataset
-        // In this case, we are setting the border of each horizontal bar to be 2px wide
-        elements: {
-            bar: {
-                borderWidth: 2,
-            },
-        },
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'right',
-            },
-        },
-    };
-
     return (
         <div>
-            <Bar data={data} options={(props.option) ? options : ""} />
+            <Doughnut data={data} />
         </div>
     )
 }
 
-export default LineChart
-
+export default DoughnutChart

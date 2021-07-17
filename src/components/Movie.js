@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import movieApi from '../api/movieApi';
+import Badge from "./Badge";
 
 const Movie = () => {
     const [movies, setMovies] = useState([]);
@@ -60,6 +61,7 @@ const Movie = () => {
                                 <th>Duration</th>
                                 <th>Language</th>
                                 <th>Year</th>
+                                <th>Genres</th>
                                 <th>Poster</th>
                                 <th>Management</th>
                             </tr>
@@ -71,6 +73,7 @@ const Movie = () => {
                                 <th>Duration</th>
                                 <th>Language</th>
                                 <th>Year</th>
+                                <th>Genres</th>
                                 <th>Poster</th>
                                 <th>Management</th>
                             </tr>
@@ -78,17 +81,20 @@ const Movie = () => {
                         <tbody>
                             {movies.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.id}</td>
-                                    <td>{item.title}</td>
-                                    <td>{item.duration}</td>
-                                    <td>{item.language}</td>
-                                    <td>{item.year}</td>
-                                    <td><img className="img-review" src={`http://127.0.0.1:9000/${item.poster}`} /></td>
+                                    <td>{item.movie.id}</td>
+                                    <td>{item.movie.title}</td>
+                                    <td>{item.movie.duration}</td>
+                                    <td>{item.movie.language}</td>
+                                    <td>{item.movie.year}</td>
+                                    <td>
+                                        <Badge genres={item.genres} />
+                                    </td>
+                                    <td><img className="img-review" src={`http://127.0.0.1:9000/${item.movie.poster}`} /></td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
-                                            <button type="button" className="btn btn-danger" onClick={() => deleteMoview(item.id)}><i className="fa fa-trash" aria-hidden="true"></i></button>
-                                            <Link to={`/movies/edit/${item.id}`} className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Link>
-                                            <Link to={`/movies/detail/${item.id}`} type="button" className="btn btn-success"><i className="fa fa-info-circle" aria-hidden="true"></i></Link>
+                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteMoview(item.movie.id) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                            <Link to={`/movies/edit/${item.movie.id}`} className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Link>
+                                            <Link to={`/movies/detail/${item.movie.id}`} type="button" className="btn btn-success"><i className="fa fa-info-circle" aria-hidden="true"></i></Link>
                                         </div>
                                     </td>
                                 </tr>

@@ -69,10 +69,11 @@ const Genre = () => {
                             {genres.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.id}</td>
+                                    {/* () => deleteGenre(item.id) */}
                                     <td>{item.name}</td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
-                                            <button type="button" className="btn btn-danger" onClick={() => deleteGenre(item.id)}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteGenre(item.id) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </td>
                                 </tr>

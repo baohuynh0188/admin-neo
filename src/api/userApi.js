@@ -13,6 +13,18 @@ class UserApi {
         const url = "/login";
         return axiosClient.post(url, params);
     };
+    userChar = () => {
+        const url = "/admin/users/char-user";
+        return axiosClient.get(url);
+    };
+    movieChar = () => {
+        const url = "/admin/users/char-movie";
+        return axiosClient.get(url);
+    };
+    movieCharAvg = () => {
+        const url = "/admin/users/char-avg";
+        return axiosClient.get(url);
+    }
 }
 
 const userApi = new UserApi();
