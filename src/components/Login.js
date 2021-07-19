@@ -2,12 +2,21 @@ import { React, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import userApi from "../api/userApi";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 import { useStateValue } from "../context/StateProvider";
 import { ACTION_TYPE } from "../reducers/reducer";
 import tool from "../tools"
 
+const schema = yup.object().shape({
+    username: yup.string().min(3, 'Username must be at least 3 characters').trim("No blank").required("Username is required"),
+    password: yup.string().min(8, 'Password must be at least 8 characters').trim("No blank").required("Password is required"),
+});
+
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
     const [state, dispatch] = useStateValue();
     const [mess, setMess] = useState(false);
 
@@ -49,12 +58,14 @@ const Login = () => {
                                         <div className="card-body">
                                             <form onSubmit={handleSubmit(onSubmit)}>
                                                 <div className="form-floating mb-3">
-                                                    <input {...register("username", { required: true, maxLength: 20 })} className="form-control" id="inputUsername" type="text" placeholder="username" />
+                                                    <input {...register("username")} className={`form-control ${errors.username ? 'is-invalid' : 'is-valid'}`} id="inputUsername" type="text" placeholder="username" />
                                                     <label htmlFor="inputUsername">Username</label>
+                                                    <p className="text-danger">{errors.username?.message}</p>
                                                 </div>
                                                 <div className="form-floating mb-3">
-                                                    <input {...register("password", { required: true })} className="form-control" id="inputPassword" type="password" placeholder="Password" minLength="8" required />
+                                                    <input {...register("password")} className={`form-control ${errors.password ? 'is-invalid' : 'is-valid'}`} id="inputPassword" type="password" placeholder="Password" />
                                                     <label htmlFor="inputPassword">Password</label>
+                                                    <p className="text-danger">{errors.password?.message}</p>
                                                 </div>
                                                 {mess ? (
                                                     <div className="alert alert-danger" role="alert">

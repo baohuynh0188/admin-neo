@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import movieApi from '../api/movieApi';
 import Badge from "./Badge";
+import Publish from "./Publish";
 
 const Movie = () => {
     const [movies, setMovies] = useState([]);
@@ -11,7 +12,6 @@ const Movie = () => {
             try {
                 const response = await movieApi.getAll();
                 setMovies(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error(error);
             }
@@ -19,9 +19,9 @@ const Movie = () => {
         fetchMoives();
     }, []);
 
-    const deleteMoview = async (movie_id) => {
+    const deleteMovie = async (movie_id) => {
         try {
-            const movieList = movies.filter((item) => item.id !== movie_id);
+            const movieList = movies.filter(item => item.movie.id !== movie_id);
             setMovies(movieList);
             await movieApi.delete(movie_id);
             // console.log(movies);
@@ -50,7 +50,7 @@ const Movie = () => {
                     Movie List
                 </div>
                 <div className="card-body">
-                    <table className="table table-bordered">
+                    <table className="table table-bordered table-striped">
                         <colgroup>
                             <col span="1" style={{ width: "10%" }} />
                         </colgroup>
@@ -62,6 +62,7 @@ const Movie = () => {
                                 <th>Language</th>
                                 <th>Year</th>
                                 <th>Genres</th>
+                                <th>Publish</th>
                                 <th>Poster</th>
                                 <th>Management</th>
                             </tr>
@@ -74,6 +75,7 @@ const Movie = () => {
                                 <th>Language</th>
                                 <th>Year</th>
                                 <th>Genres</th>
+                                <th>Publish</th>
                                 <th>Poster</th>
                                 <th>Management</th>
                             </tr>
@@ -89,10 +91,13 @@ const Movie = () => {
                                     <td>
                                         <Badge genres={item.genres} />
                                     </td>
+                                    <td>
+                                        <Publish publish={item.movie.publish} />
+                                    </td>
                                     <td><img className="img-review" src={`http://127.0.0.1:9000/${item.movie.poster}`} /></td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
-                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteMoview(item.movie.id) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteMovie(item.movie.id) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                             <Link to={`/movies/edit/${item.movie.id}`} className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Link>
                                             <Link to={`/movies/detail/${item.movie.id}`} type="button" className="btn btn-success"><i className="fa fa-info-circle" aria-hidden="true"></i></Link>
                                         </div>

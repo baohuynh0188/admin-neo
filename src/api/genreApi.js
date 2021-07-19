@@ -5,8 +5,8 @@ class GenreApi {
     const url = "/admin/genres";
     return axiosClient.get(url);
   };
-  delete = (id) => {
-    const url = `/admin/genres/${id}`;
+  delete = (name) => {
+    const url = `/admin/genres/${name}`;
     return axiosClient.delete(url);
   };
   addGenre = (params) => {

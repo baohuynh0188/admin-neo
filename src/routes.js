@@ -6,6 +6,11 @@ import GenreAdd from "./components/GenreAdd"
 import MovieAdd from "./components/MovieAdd";
 import MovieEdit from "./components/MovieEdit";
 import MovieDetail from "./components/MovieDetail";
+import Actor from "./components/Actor"
+import UserDetail from "./components/UserDetail";
+import Country from "./components/Country";
+import ActorAdd from "./components/ActorAdd";
+import CountryAdd from "./components/CountryAdd";
 
 const routes = [
     {
@@ -26,6 +31,11 @@ const routes = [
     {
         path: "/users",
         component: () => <User />,
+        exact: true,
+    },
+    {
+        path: "/users/profile/:username",
+        component: () => <UserDetail />,
         exact: false,
     },
     {
@@ -46,6 +56,26 @@ const routes = [
     {
         path: "/movies/edit/:id",
         component: () => <MovieEdit />,
+        exact: false,
+    },
+    {
+        path: "/actors",
+        component: () => <Actor />,
+        exact: true,
+    },
+    {
+        path: "/actors/add",
+        component: () => <ActorAdd />,
+        exact: false,
+    },
+    {
+        path: "/countries",
+        component: () => <Country />,
+        exact: true,
+    },
+    {
+        path: "/countries/add",
+        component: () => <CountryAdd />,
         exact: false,
     },
 ];

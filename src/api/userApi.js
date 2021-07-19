@@ -13,6 +13,10 @@ class UserApi {
         const url = "/login";
         return axiosClient.post(url, params);
     };
+    profile = (params) => {
+        const url = "/profile";
+        return axiosClient.post(url, params);
+    };
     userChar = () => {
         const url = "/admin/users/char-user";
         return axiosClient.get(url);

@@ -1,27 +1,29 @@
 import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import genreApi from '../api/genreApi';
+import countryApi from '../api/countryApi';
 
-const Genre = () => {
-    const [genres, setGenres] = useState([]);
+const Country = () => {
+
+    const [countries, setCountries] = useState([]);
+
     useEffect(() => {
-        const fetchGenres = async () => {
+        const fetchCountries = async () => {
             try {
-                const response = await genreApi.getAll();
-                setGenres(response.data);
+                const response = await countryApi.getAll();
+                setCountries(response.data);
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
             }
         };
-        fetchGenres();
+        fetchCountries();
     }, []);
 
-    const deleteGenre = async (genre_name) => {
+    const deleteCountry = async (country) => {
         try {
-            const genreList = genres.filter(item => item.name !== genre_name);
-            setGenres(genreList);
-            await genreApi.delete(genre_name);
+            const countryList = countries.filter(item => item.country !== country);
+            setCountries(countryList);
+            await countryApi.delete(country);
         } catch (error) {
             console.error(error);
         }
@@ -29,22 +31,22 @@ const Genre = () => {
 
     return (
         <div className="container-fluid px-4">
-            <h1 className="mt-4">Genres</h1>
+            <h1 className="mt-4">Countries</h1>
             <ol className="breadcrumb mb-4">
                 <li className="breadcrumb-item"><Link to="/">Dashboard</Link></li>
-                <li className="breadcrumb-item active">Genres</li>
+                <li className="breadcrumb-item active">Countries</li>
             </ol>
             <div className="card mb-4">
                 <div className="card-body">
                     <div className="btn-group" role="group" aria-label="Tools">
-                        <Link to="/genres/add" className="btn btn-outline-success" ><i className="fa fa-plus" aria-hidden="true"></i></Link>
+                        <Link to="/countries/add" className="btn btn-outline-success" ><i className="fa fa-plus" aria-hidden="true"></i></Link>
                     </div>
                 </div>
             </div>
             <div className="card mb-4">
                 <div className="card-header">
                     <i className="fas fa-table me-1"></i>
-                    Genre List
+                    Country List
                 </div>
                 <div className="card-body">
                     <table className="table table-bordered table-striped">
@@ -64,13 +66,12 @@ const Genre = () => {
                             </tr>
                         </tfoot>
                         <tbody>
-                            {genres.map((item, index) => (
+                            {countries.map((item, index) => (
                                 <tr key={index}>
-                                    {/* () => deleteGenre(item.id) */}
-                                    <td>{item.name}</td>
+                                    <td>{item.country}</td>
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
-                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteGenre(item.name) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteCountry(item.country) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -83,4 +84,4 @@ const Genre = () => {
     )
 }
 
-export default Genre
+export default Country

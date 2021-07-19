@@ -18,6 +18,14 @@ const Silde = () => {
                             <div className="sb-nav-link-icon"><i className="fa fa-superpowers"></i></div>
                             Genres
                         </Link>
+                        <Link to="/actors" className="nav-link collapsed" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div className="sb-nav-link-icon"><i class="fa fa-gratipay" aria-hidden="true"></i></div>
+                            Actors
+                        </Link>
+                        <Link to="/countries" className="nav-link collapsed" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div className="sb-nav-link-icon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></div>
+                            Countries
+                        </Link>
                         <Link to="/users" className="nav-link collapsed" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div className="sb-nav-link-icon"><i className="fa fa-user"></i></div>
                             Users
