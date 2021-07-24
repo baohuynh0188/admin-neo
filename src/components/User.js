@@ -80,7 +80,7 @@ const User = () => {
                                     <td>
                                         <div className="btn-group" role="group" aria-label="Management">
                                             <button type="button" className="btn btn-danger" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteUser(item.username) }}><i className="fa fa-trash" aria-hidden="true"></i></button>
-                                            <Link to={`/users/profile/${item.username}`} className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Link>
+                                            {/* <Link to={`/users/profile/${item.username}`} className="btn btn-warning"><i className="fa fa-pencil-square-o" aria-hidden="true"></i></Link> */}
                                         </div>
                                     </td>
                                 </tr>
